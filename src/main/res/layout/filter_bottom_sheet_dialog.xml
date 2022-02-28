@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_weight="100"
+                android:gravity="center_vertical"
+                android:text="Filter"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/cancel_sheet"
+                style="@android:style/Widget.Holo.Button.Borderless.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icons8_delete_2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Price"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/priceRange"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:valueFrom="1"
+                android:valueTo="1400"
+                app:values="@array/initial_range"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/price_range_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="$100 - $1400" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/applyFilter"
+            style="@android:style/Widget.Holo.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/black"
+            android:text="@string/filter" />
+
+
+    </LinearLayout>
+
+</ScrollView>

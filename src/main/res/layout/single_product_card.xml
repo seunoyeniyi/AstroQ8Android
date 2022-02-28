@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="1dp"
+    tools:ignore="UseCompoundDrawables">
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_fill"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/f1"
+            android:contentDescription="@string/image"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/default_image" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F4F4F4"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/catText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/secondary"
+            android:ellipsize="end"
+            android:minLines="1"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:singleLine="true"
+            android:text="Uncategorized"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat"
+            android:gravity="left"
+            android:maxLines="3"
+            android:padding="1dp"
+            android:text="@string/product_title_sample"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/regularPriceView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="end"
+                android:text="@string/zero_price_sample"
+                android:textColor="#8F8F8F"
+                android:textSize="14sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/priceView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="start"
+                android:paddingTop="0dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:text="@string/product_price_sample"
+                android:textColor="#EC0303"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/wishListToggle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/contentLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="-150dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/wishlist_bg_selector"
+        android:clickable="true"
+        android:padding="7dp"
+        app:srcCompat="@drawable/icons8_heart_9"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@id/contentLayout"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/add_to_cart_selector_circle"
+        android:clickable="true"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"
+        app:srcCompat="@drawable/icons8_add_shopping_cart"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/out_of_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/select_circle_secondary"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Out of Stock"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/save_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/circle_color2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Save Rs0.0"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/add_to_cart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/contentLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
+        android:text="ADD TO CART"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:backgroundTint="@color/secondary"
+        app:cornerRadius="0dp" />
+
+</RelativeLayout>

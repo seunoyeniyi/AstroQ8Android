@@ -2,6 +2,7 @@ package com.astro.q8.ui.home;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.astro.q8.adapter.CategoriesGridAdapter;
+import com.astro.q8.adapter.CategoriesList;
+import com.astro.q8.ui.LoginActivity;
+import com.astro.q8.ui.RegisterActivity;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.astro.q8.MainActivity;
 import com.astro.q8.Site;
@@ -72,13 +77,17 @@ public class HomeFragment extends Fragment {
 
 
     MyGridView featuredProductsGrid;
+    MyGridView catGridView;
     ArrayList<ProductList> featuredProductLists;
+    ArrayList<CategoriesList> catGridLists;
     ProductGridAdapter featuredProductsAdapter;
+    CategoriesGridAdapter catGridAdapter;
     Button featuredProductsRefresh;
     ShimmerFrameLayout featuredProductsShim;
     ShimmerFrameLayout bannerShimmer;
 
-
+    Button loginBtn, signUpBtn;
+    LinearLayout loggedCheck;
 
     RecyclerView bannersRecycler; //slide banner
 
@@ -87,6 +96,8 @@ public class HomeFragment extends Fragment {
     //because of cartCounter
     @SuppressLint("ResourceType")
     public void initOnCreateViews() {
+
+        userSession = new UserSession(requireContext().getApplicationContext());
 
         siteInfo = new SiteInfo(requireActivity().getApplicationContext());
 
@@ -104,7 +115,15 @@ public class HomeFragment extends Fragment {
 
             requestQueue = Volley.newRequestQueue(requireContext());
 
+            loggedCheck = (LinearLayout) requireActivity().findViewById(R.id.logged_check);
+            loginBtn = (Button) requireActivity().findViewById(R.id.login_btn);
+            signUpBtn = (Button) requireActivity().findViewById(R.id.register_btn);
 
+            if (userSession.logged()) {
+                loggedCheck.setVisibility(View.GONE);
+            } else {
+                loggedCheck.setVisibility(View.VISIBLE);
+            }
 
             featuredProductsShim = (ShimmerFrameLayout) requireActivity().findViewById(R.id.shimmer_view_container);
             featuredProductsShim.startShimmer();
@@ -119,9 +138,15 @@ public class HomeFragment extends Fragment {
             featuredProductsAdapter = new ProductGridAdapter(requireActivity(), featuredProductLists, cartCounter, R.layout.single_product_card);
             featuredProductsGrid.setAdapter(featuredProductsAdapter);
 
+            //categories Grids
+            catGridView = (MyGridView) requireActivity().findViewById(R.id.categories_grids);
+            catGridLists = new ArrayList<>();
+            catGridAdapter = new CategoriesGridAdapter(requireActivity(), catGridLists);
+            catGridView.setAdapter(catGridAdapter);
+
             fetchAvailableBanners();
 
-
+            fetchCategoriesGrids();
 
             ((TextView) requireActivity().findViewById(R.id.by_trending)).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -139,15 +164,29 @@ public class HomeFragment extends Fragment {
             });
 
 
-            fetchProduct(featuredProductsAdapter, featuredProductLists, featuredProductsShim, featuredProductsRefresh, "popularity");
+            //fetchProduct(featuredProductsAdapter, featuredProductLists, featuredProductsShim, featuredProductsRefresh, "popularity");
 
             featuredProductsRefresh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     fetchAvailableBanners();
-                    fetchProduct(featuredProductsAdapter, featuredProductLists, featuredProductsShim, featuredProductsRefresh, "popularity");
+                    //fetchProduct(featuredProductsAdapter, featuredProductLists, featuredProductsShim, featuredProductsRefresh, "popularity");
                 }
             });
+
+            loginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(requireActivity(), LoginActivity.class));
+                }
+            });
+            signUpBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(requireActivity(), RegisterActivity.class));
+                }
+            });
+
 
         }
 
@@ -641,6 +680,59 @@ public class HomeFragment extends Fragment {
     }
 
 
+    public void fetchCategoriesGrids() {
+        featuredProductsShim.setVisibility(View.VISIBLE);
+        featuredProductsShim.startShimmer();
+        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order";
+
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Activity activity = getActivity();
+                if(activity == null || !isAdded()){
+                    return; //to avoid crash
+                }
+
+                catGridLists = new ArrayList<>();
+
+                try {
+                    JSONArray array = new JSONArray(response);
+                    if (!isAdded()) return;
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject category = array.getJSONObject(i);
+                        catGridLists.add(new CategoriesList(category.getString("name"), category.getString("slug"), category.getString("count"), null, category.getString("image"), category.getString("icon")));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                catGridAdapter = new CategoriesGridAdapter(requireActivity(), catGridLists);
+                catGridView.setAdapter(catGridAdapter);
+                featuredProductsShim.stopShimmer();
+                featuredProductsShim.setVisibility(View.GONE);
+                featuredProductsRefresh.setVisibility(View.GONE);
+
+
+            }
+        }, (VolleyError error) -> {
+            Activity activity = getActivity();
+            if(activity == null || !isAdded()){
+                return; //to avoid crash
+            }
+            //handle error
+            if (!isAdded()) return;
+
+            featuredProductsShim.setVisibility(View.GONE);
+            featuredProductsShim.stopShimmer();
+            featuredProductsRefresh.setVisibility(View.VISIBLE);
+        });
+
+        request.setShouldCache(false);
+        request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(request);
+    }
 
 
 }

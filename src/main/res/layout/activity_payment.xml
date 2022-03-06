@@ -73,7 +73,7 @@
                             android:id="@+id/fullNameView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/jane"
+                            android:text="Name"
                             android:textColor="#000000"
                             android:textSize="15sp" />
 
@@ -87,7 +87,8 @@
                             android:id="@+id/address2View"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/aparment_optional" />
+                            android:text="@string/aparment_optional"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/cityStateCountryView"

@@ -197,12 +197,15 @@ public class MainActivity extends AppCompatActivity {
         //buttons q8 drawer on activity_main
         ImageButton drawerCloseBtn = findViewById(R.id.closeBtn);
         Menu nav_Menu = navigationView.getMenu();
+        MenuItem nav_logBtn = nav_Menu.findItem(R.id.nav_logut);
         if (userSession.logged()) {
             headerUsername.setText(userSession.username);
             headerViewProfile.setText("Account Settings");
+            nav_logBtn.setTitle("Log out");
         } else {
             headerUsername.setText("Hi!");
             headerViewProfile.setText("Log In");
+            nav_logBtn.setTitle("Log In");
         }
         headerViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,7 +344,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
                 case R.id.nav_logut:
-                    logout();
+                    if (userSession.logged()) {
+                        logout();
+                    } else {
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    }
                 break;
                 default:
                     break;

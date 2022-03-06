@@ -8,4 +8,5 @@
     android:ellipsize="marquee"
     android:padding="10dp"
     android:singleLine="true"
-    android:textColor="@color/black" />
+    android:textColor="@color/black"
+    android:textStyle="bold" />

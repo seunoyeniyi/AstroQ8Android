@@ -17,6 +17,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+        <LinearLayout
+            android:id="@+id/logged_check"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:text="Log In"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:backgroundTint="@color/white" />
+
+            <Button
+                android:id="@+id/register_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat"
+                android:text="Sign Up"
+                android:textSize="12sp" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/big_banner_recycler"
             android:layout_width="match_parent"
@@ -81,7 +114,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,7 +159,7 @@
                 </LinearLayout>
 
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_view_container"
+                    android:id="@+id/shimmer_view_container_old"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -199,6 +233,50 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            shimmer:duration="800">
+
+            <!-- Adding 7 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/shop_shimmering_layout" />
+
+                <include layout="@layout/shop_shimmering_layout" />
+
+                <include layout="@layout/shop_shimmering_layout" />
+
+                <include
+                    layout="@layout/shop_shimmering_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.astro.q8.ui.MyGridView
+            android:id="@+id/categories_grids"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:horizontalSpacing="0dp"
+            android:numColumns="2"
+            android:verticalSpacing="0dp"
+            tools:ignore="NestedScrolling" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/carousel_banner_recycler"

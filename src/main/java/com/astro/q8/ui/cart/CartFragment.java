@@ -513,13 +513,13 @@ public class CartFragment extends Fragment {
     public View.OnClickListener checkOutBtnClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (userSession.logged()) {
-                //to next address activity
+//            if (userSession.logged()) {
+//                //to next address activity
                 startActivity(new Intent(getActivity(), AddressActivity.class));
-            } else {
-                //to login and from login to address
-                startActivity(new Intent(getActivity(), LoginActivity.class).putExtra("activity_from", "address"));
-            }
+//            } else {
+//                //to login and from login to address
+//                startActivity(new Intent(getActivity(), LoginActivity.class).putExtra("activity_from", "address"));
+//            }
         }
     };
 
@@ -535,4 +535,14 @@ public class CartFragment extends Fragment {
 //        requestQueue.cancelAll(requireContext());
 //    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (cartList.size() > 0) {
+            cartList = new ArrayList<>();
+            cartAdapter = new CartAdapter(requireContext(), cartList, cartCounter);
+            fetchData(userSession.userID, requireContext());
+        }
+
+    }
 }

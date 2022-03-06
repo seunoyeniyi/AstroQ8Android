@@ -83,6 +83,15 @@ public class AddToCartWithUpdateCartCount {
             }
 
 
+             if (object.has("code") || object.has("msg")) {
+                alerter.setBackgroundColorRes(R.color.secondary);
+                alerter.setIcon(R.drawable.icons8_cancel_2);
+                alerter.setText(object.getString("msg"));
+                if (!Alerter.isShowing())
+                    alerter.show();
+                return;
+            }
+
             if (Integer.parseInt(object.getString("contents_count")) > 0) {
                 cartCounter.setVisibility(View.VISIBLE);
                 cartCounter.setText(object.getString("contents_count"));

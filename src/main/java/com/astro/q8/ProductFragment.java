@@ -627,7 +627,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
 
             commentRecyclerAdapter.notifyDataSetChanged();
 
-            Objects.requireNonNull(tabLayout.getTabAt(2)).setText("REVIEWS(" + commentLists.size() + ")");
+            //Objects.requireNonNull(tabLayout.getTabAt(2)).setText("REVIEWS(" + commentLists.size() + ")");
 
 //            parseRelatedData(object.getJSONArray("related_products"));
 
@@ -923,7 +923,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
                                 Toast.makeText(requireContext(), "Review Submitted", Toast.LENGTH_LONG).show();
                                 commentLists.add(new CommentList(userSession.username, comment, rating, userSession.get_profile_image()));
                                 commentRecyclerAdapter.notifyDataSetChanged();
-                                Objects.requireNonNull(tabLayout.getTabAt(2)).setText("REVIEWS(" + commentLists.size() + ")");
+                                //Objects.requireNonNull(tabLayout.getTabAt(2)).setText("REVIEWS(" + commentLists.size() + ")");
                             } else {
                                 Toast.makeText(requireContext(), "Unable to add review... Try again.", Toast.LENGTH_LONG).show();
                             }

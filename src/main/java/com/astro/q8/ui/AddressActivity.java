@@ -140,8 +140,7 @@ public class AddressActivity extends AppCompatActivity {
         loader = ProgressDialog.show(this, "Loading", "Please wait...", true);
         fetchCartData(this);
 
-        if (userSession.logged())
-            getToken();
+        getToken();
 
     }
 
@@ -221,7 +220,14 @@ public class AddressActivity extends AppCompatActivity {
         //when fetching is ready
     }
 
+    @SuppressLint("SetTextI18n")
     public void setFormValues() {
+        if (!userSession.logged()) {
+            //set default country
+            country.setText("Kuwait");
+            loader.hide();
+            return;
+        }
 //        fetch user data and set form if the user have the fields
         loader.show();
         String url = Site.USER + userSession.userID + "?with_regions=1";
@@ -304,6 +310,8 @@ public class AddressActivity extends AppCompatActivity {
         request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
+
+
     }
 
     public List<CountryStates> getCountryStates(String countryCode, List<StateLists> stateLists) {
@@ -409,17 +417,22 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     public void submitDetails() throws JSONException {
-        String url = Site.UPDATE_SHIPPING + userSession.userID;
+
+        String url = Site.UPDATE_CART_SHIPPING  + userSession.userID;
+        if (userSession.logged()) {
+            url = Site.UPDATE_SHIPPING + userSession.userID;
+        }
+
         JSONObject data = new JSONObject();
         data.put("first_name", fname.getText().toString());
         data.put("last_name", lname.getText().toString());
-//        data.put("company", company.getText().toString());
+        data.put("company", "" /*company.getText().toString()*/);
         data.put("country", country.getText().toString());
         data.put("state", state.getText().toString());
         data.put("city", city.getText().toString());
-//        data.put("postcode", postcode.getText().toString());
+        data.put("postcode", "" /*postcode.getText().toString()*/);
         data.put("address_1", address_1.getText().toString());
-//        data.put("address_2", address_2.getText().toString());
+        data.put("address_2", "" /*address_2.getText().toString()*/);
         data.put("email", email.getText().toString());
         data.put("phone", phone.getText().toString());
 //        data.put("selected_country", selectedCountry);
@@ -432,22 +445,30 @@ public class AddressActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) { //response.toString() to get json as string
 //                        Log.e("res:", response.toString());
                         //savings result
-                        try {
-                            JSONObject object = new JSONObject(response.toString());
-                            if (object.getString("code").equals("saved")) {
-                                loader.hide();
-                                startActivity(new Intent(AddressActivity.this, PaymentActivity.class));
-                                finish();
-                            } else {
-                                //not saved
-                                Toast toast = Toast.makeText(AddressActivity.this, "Address not saved!", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 0);
-                                toast.show();
-                                loader.hide();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            JSONObject object = new JSONObject(response.toString());
+//                            if (object.getString("code").equals("saved")) {
+//                                loader.hide();
+//                                startActivity(new Intent(AddressActivity.this, PaymentActivity.class));
+//                                finish();
+//                            } else {
+//                                //not saved
+//                                Toast toast = Toast.makeText(AddressActivity.this, "Address not saved!", Toast.LENGTH_LONG);
+//                                toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 0);
+//                                toast.show();
+//                                loader.hide();
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+
+                        loader.hide();
+                        Intent intent = new Intent(AddressActivity.this, PaymentActivity.class);
+                        intent.putExtra("parseData", data.toString());
+                        startActivity(intent);
+                        finish();
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -497,7 +518,7 @@ public class AddressActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     //Token
                     String token = task.getResult();
-                    String url = Site.SAVE_DEVICE + userSession.userID;
+                    String url = Site.ADD_DEVICE + userSession.userID;
                     JSONObject data = new JSONObject();
                     try {
                         data.put("device", token);

@@ -5,8 +5,8 @@ import java.text.DecimalFormat;
 public class PriceFormatter {
 
     public static String format(String price) {
-        DecimalFormat formatterDecimal = new DecimalFormat("#,###.00");
-        DecimalFormat formatterWhole = new DecimalFormat("#,###");
+        DecimalFormat formatterDecimal = new DecimalFormat("#,###.000"); //three zeros for astroq8
+        DecimalFormat formatterWhole = new DecimalFormat("#,###.000"); //add .000 for astroq8
         if (!price.isEmpty()) {
             double doublePrice = Double.parseDouble(price);
             //if is a whole number else decimal number
@@ -24,8 +24,8 @@ public class PriceFormatter {
         }
     }
     public static String format(Double price) {
-        DecimalFormat formatterDecimal = new DecimalFormat("#,###.00");
-        DecimalFormat formatterWhole = new DecimalFormat("#,###");
+        DecimalFormat formatterDecimal = new DecimalFormat("#,###.000"); //three zeros for astroq8
+        DecimalFormat formatterWhole = new DecimalFormat("#,###.000"); //add .000 for astroq8
 
         //if is a whole number else decimal number
         if (price % 1 == 0) {

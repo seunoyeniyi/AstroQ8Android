@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -316,7 +317,25 @@ public class PaymentActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @SuppressLint("SetTextI18n")
     public void fetchAddress() {
+        if (!userSession.logged()) {
+            if (getIntent().hasExtra("parseData")) {
+                JSONObject address = null;
+                try {
+                    address = new JSONObject(getIntent().getStringExtra("parseData"));
+                    fullNameView.setText(address.getString("first_name") + " " + address.getString("last_name"));
+                    address1View.setText(address.getString("address_1"));
+                    address2View.setText(address.getString("address_2"));
+                    cityStateCountryView.setText(address.getString("city") + " " + address.getString("state") + ", " + address.getString("country"));
+                    phoneView.setText(address.getString("phone") + ", " + address.getString("email"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            loader.hide();
+            return;
+        }
         loader.show();
         String url = Site.USER + userSession.userID;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -406,8 +425,35 @@ public class PaymentActivity extends AppCompatActivity {
                     if (!paymentMethod.equals("web")) {
                         jsonParam.put("payment_method", paymentMethod);
                     }
-                    if (!paymentMethod.equals("paypal")) { //dont first clear cart of paypal
+                    if (!paymentMethod.equals("paypal")) { //don't first clear cart of paypal
                         jsonParam.put("clear_cart", "1"); //clear cart after order created
+                        if (!userSession.logged()) userSession.logout(); //to clear the hash id
+                    }
+
+                    //for AstroQ8 and MyShirtEg.. will allow guest to order
+                    if (!userSession.logged()) {
+                        if (getIntent().hasExtra("parseData")) {
+                            JSONObject address = null;
+                            try {
+                                address = new JSONObject(getIntent().getStringExtra("parseData"));
+
+                                jsonParam.put("allow_guest", 1);
+                                jsonParam.put("shipping_first_name", address.getString("first_name"));
+                                jsonParam.put("shipping_last_name", address.getString("last_name"));
+                                jsonParam.put("shipping_company", address.getString("company"));
+                                jsonParam.put("shipping_country", address.getString("country"));
+                                jsonParam.put("shipping_state", address.getString("state"));
+                                jsonParam.put("shipping_city", address.getString("city"));
+                                jsonParam.put("shipping_postcode", address.getString("postcode"));
+                                jsonParam.put("shipping_address_1", address.getString("address_1"));
+                                jsonParam.put("shipping_address_2", address.getString("address_2"));
+                                jsonParam.put("shipping_email", address.getString("email"));
+                                jsonParam.put("shipping_phone", address.getString("phone"));
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
 
 

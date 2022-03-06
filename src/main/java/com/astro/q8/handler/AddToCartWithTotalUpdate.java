@@ -17,7 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.astro.q8.R;
 import com.astro.q8.Site;
+import com.tapadoo.alerter.Alerter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -102,6 +104,10 @@ public class AddToCartWithTotalUpdate {
             double subtotalDouble = Double.parseDouble(object.getString("subtotal"));
             double couponDiscountDouble = 0;
             double rewardDiscountDouble = 0;
+
+            if (object.has("code") || object.has("msg")) {
+                Toast.makeText(context, object.getString("msg"), Toast.LENGTH_LONG).show();
+            }
 
 
             if (Integer.parseInt(object.getString("contents_count")) > 0) {

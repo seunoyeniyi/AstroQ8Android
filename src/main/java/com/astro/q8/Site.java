@@ -16,7 +16,8 @@ public class Site {
     public static final String USER = ADDRESS + "wp-json/skye-api/v1/user-info/";
     public static final String UPDATE_USER = ADDRESS + "wp-json/skye-api/v1/update-user-info/";
     public static final String UPDATE_SHIPPING = ADDRESS + "wp-json/skye-api/v2/update-user-shipping-address/"; //v2
-    public static final String CREATE_ORDER = ADDRESS + "wp-json/skye-api/v1/create-order/";
+    public static final String UPDATE_CART_SHIPPING  = ADDRESS + "wp-json/skye-api/v2/update-cart-shipping/"; //v2
+    public static final String CREATE_ORDER = ADDRESS + "wp-json/skye-api/v2/create-order/"; //v2
     public static final String UPDATE_COUPON = ADDRESS + "wp-json/skye-api/v1/update-cart-coupon/";
     public static final String CHANGE_CART_SHIPPING = ADDRESS + "wp-json/skye-api/v2/change-cart-shipping-method/"; //v2
     public static final String ORDERS = ADDRESS + "wp-json/skye-api/v1/orders/";

@@ -7,4 +7,5 @@
     android:background="@drawable/abc_spinner_mtrl_am_alpha"
     android:ellipsize="marquee"
     android:singleLine="true"
-    android:textColor="#353535" />
+    android:textColor="#353535"
+    android:textStyle="bold" />

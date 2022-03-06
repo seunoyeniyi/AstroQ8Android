@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -126,7 +127,7 @@ public class ArchiveFragment extends Fragment {
         categoryTitleView = (TextView) root.findViewById(R.id.category_title);
         categoryDescriptionView = (TextView) root.findViewById(R.id.category_description);
 
-        categoryTitleView.setText(cat_title);
+        categoryTitleView.setText(Html.fromHtml(cat_title));
         if (cat_description.length() > 0) {
             categoryDescriptionView.setText(cat_description);
             categoryDescriptionView.setVisibility(View.VISIBLE);

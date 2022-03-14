@@ -146,7 +146,7 @@ public class OrderActivity extends AppCompatActivity {
         progressBar.startShimmer();
         orderDetailsLayout.setVisibility(View.GONE);
         shippingLayout.setVisibility(View.GONE);
-        String url = Site.ORDER + order_id + "/" + userSession.userID;
+        String url = Site.ORDER + order_id + "/" + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

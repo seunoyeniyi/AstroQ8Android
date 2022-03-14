@@ -278,13 +278,13 @@ public class HomeFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         progressBar.startShimmer();
 
-        String url = Site.SIMPLE_PRODUCTS + "?orderby=popularity&per_page=20&hide_description=1&show_variation=1";
+        String url = Site.SIMPLE_PRODUCTS + "?orderby=popularity&per_page=20&hide_description=1&show_variation=1" + Site.TOKEN_KEY_APPEND;
 
         userSession = new UserSession(requireContext().getApplicationContext());
         if (userSession.logged()) {
             url += "&user_id=" + userSession.userID;
         }
-
+        url = url + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -452,7 +452,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<BannerRecyclerClass> bannerLists = new ArrayList<>();
 
-        String url = Site.BANNERS + "?type=" + type;
+        String url = Site.BANNERS + "?type=" + type + Site.TOKEN_KEY_APPEND;
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -566,7 +566,7 @@ public class HomeFragment extends Fragment {
         RecyclerView videoRecyclerView = (RecyclerView) root.findViewById(R.id.video_banner_recycler);
         ArrayList<BannerRecyclerClass> bannerLists = new ArrayList<>();
 
-        String url = Site.BANNERS + "?type=video";
+        String url = Site.BANNERS + "?type=video" + Site.TOKEN_KEY_APPEND;
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
@@ -683,7 +683,7 @@ public class HomeFragment extends Fragment {
     public void fetchCategoriesGrids() {
         featuredProductsShim.setVisibility(View.VISIBLE);
         featuredProductsShim.startShimmer();
-        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order";
+        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order" + Site.TOKEN_KEY_APPEND;
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override

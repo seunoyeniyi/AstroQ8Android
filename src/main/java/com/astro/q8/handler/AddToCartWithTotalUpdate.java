@@ -67,6 +67,7 @@ public class AddToCartWithTotalUpdate {
         if (!userSession.userID.equals("0")) data.put("user", userSession.userID);
         data.put("quantity", quantity);
         if (replaceQuantity) data.put("replace_quantity", "1");
+        data.put("token_key", Site.TOKEN_KEY);
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {

@@ -43,7 +43,7 @@ public class GetVariationPriceView {
 
         priceVariationProgressBar.setVisibility(View.VISIBLE);
         addToCartBtn.setEnabled(false);
-        String url = Site.PRODUCT_VARIATION + productID + "?" + params;
+        String url = Site.PRODUCT_VARIATION + productID + "?" + params + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -282,6 +282,7 @@ public class LoginActivity extends AppCompatActivity {
         data.put("username", usernameEmail);
         data.put("password", password);
         data.put("replace_cart_user", userSession.userID);
+        data.put("token_key", Site.TOKEN_KEY);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -309,6 +310,7 @@ public class LoginActivity extends AppCompatActivity {
         data.put("login_id", login_id);
         data.put("login_type", login_type);
         data.put("replace_cart_user", userSession.userID);
+        data.put("token_key", Site.TOKEN_KEY);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {
                     @Override

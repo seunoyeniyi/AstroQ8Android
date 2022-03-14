@@ -105,7 +105,7 @@ public class ProfileAddressActivity extends AppCompatActivity {
     public void setFormValues() {
 //        fetch user data and set form if the user have the fields
         loader.show();
-        String url = Site.USER + userSession.userID;
+        String url = Site.USER + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -115,17 +115,17 @@ public class ProfileAddressActivity extends AppCompatActivity {
                     JSONObject address = new JSONObject(object.getString("shipping_address"));
                     fname.setText(address.getString("shipping_first_name"));
                     lname.setText(address.getString("shipping_last_name"));
-                    company.setText(address.getString("shipping_company"));
-                    gender.setText(object.getString("gender"));
-                    dob.setText(object.getString("birthday"));
+//                    company.setText(address.getString("shipping_company"));
+//                    gender.setText(object.getString("gender"));
+//                    dob.setText(object.getString("birthday"));
                     address_1.setText(address.getString("shipping_address_1"));
                     address_2.setText(address.getString("shipping_address_2"));
                     city.setText(address.getString("shipping_city"));
                     state.setText(address.getString("shipping_state"));
-                    postcode.setText(address.getString("shipping_postcode"));
+//                    postcode.setText(address.getString("shipping_postcode"));
                     country.setText(address.getString("shipping_country"));
                     phone.setText(address.getString("shipping_phone"));
-                    other_phone.setText(object.getString("other_phone"));
+//                    other_phone.setText(object.getString("other_phone"));
                     email.setText(address.getString("shipping_email"));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -177,11 +177,7 @@ public class ProfileAddressActivity extends AppCompatActivity {
                 city.requestFocus();
                 formPassed = false;
             }
-            if (isEmpty(postcode)) {
-                postcode.setError("Postcode required!");
-                postcode.requestFocus();
-                formPassed = false;
-            }
+
             if (isEmpty(phone)) {
                 phone.setError("Phone required!");
                 phone.requestFocus();
@@ -231,6 +227,7 @@ public class ProfileAddressActivity extends AppCompatActivity {
         data.put("email", email.getText().toString());
         data.put("phone", phone.getText().toString());
         data.put("other_phone", other_phone.getText().toString());
+        data.put("token_key", Site.TOKEN_KEY);
 
         loader.show();
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,

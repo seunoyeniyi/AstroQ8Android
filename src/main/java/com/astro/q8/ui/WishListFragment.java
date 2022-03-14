@@ -161,7 +161,7 @@ public class WishListFragment extends Fragment {
     public void  fetchData(Context context) {
         shopProgressBar.setVisibility(View.VISIBLE);
         shopProgressBar.startShimmer();
-        String url = Site.WISH_LIST + userSession.userID + "?hide_description=1&show_variation=1";
+        String url = Site.WISH_LIST + userSession.userID + "?hide_description=1&show_variation=1" + Site.TOKEN_KEY_APPEND;
         noQuery.setVisibility(View.GONE);
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override

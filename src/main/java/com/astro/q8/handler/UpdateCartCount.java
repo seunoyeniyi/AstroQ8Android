@@ -25,7 +25,7 @@ public class UpdateCartCount {
         this.cartTextView = cartTextView;
 //        this.activity = (Activity) context;
 
-        String url = Site.CART + userID;
+        String url = Site.CART + userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

@@ -335,6 +335,8 @@ public class ArchiveFragment extends Fragment {
             url += "&price_range=" + String.valueOf(priceRange.get(0)) + "|" + String.valueOf(priceRange.get(1));
         }
 
+        url = url + Site.TOKEN_KEY_APPEND;
+
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override

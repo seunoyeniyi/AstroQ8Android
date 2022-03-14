@@ -125,7 +125,7 @@ public class Search extends AppCompatActivity {
     }
 
     public void  fetchData(Context context) {
-        String url = Site.SIMPLE_PRODUCTS + "?search=" + searchQuery + "&show_variation=1&user_id=" + userSession.userID;
+        String url = Site.SIMPLE_PRODUCTS + "?search=" + searchQuery + "&show_variation=1&user_id=" + userSession.userID + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

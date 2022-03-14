@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.AddressActivity">
+    tools:context=".ui.PaymentActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -374,7 +374,7 @@
                             android:id="@+id/credit_card_radio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Visa/Master Card"
+                            android:text="Pay with Card"
                             android:visibility="visible"
                             app:buttonTint="@color/primary" />
 

@@ -121,6 +121,7 @@ public class SplashScreen extends AppCompatActivity {
                     JSONObject data = new JSONObject();
                     try {
                         data.put("device", token);
+                        data.put("token_key", Site.TOKEN_KEY);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -185,7 +186,7 @@ public class SplashScreen extends AppCompatActivity {
     public void checkupCheck() {
 
         progressBar.setVisibility(View.VISIBLE);
-        String url = Site.INFO;
+        String url = Site.INFO + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

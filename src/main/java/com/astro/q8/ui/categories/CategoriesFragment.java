@@ -109,7 +109,7 @@ public class CategoriesFragment extends Fragment {
         categoriesRecycler.setVisibility(View.GONE);
         categoriesShimmer.setVisibility(View.VISIBLE);
         categoriesShimmer.startShimmer();
-        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order";
+        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order" + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

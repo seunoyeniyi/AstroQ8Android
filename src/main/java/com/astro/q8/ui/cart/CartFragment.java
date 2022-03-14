@@ -247,7 +247,7 @@ public class CartFragment extends Fragment {
         progressBar.startShimmer();
 //        loadingDialog.show();
 //        pointsTextView.setVisibility(View.GONE);
-        String url = Site.CART + userID;
+        String url = Site.CART + userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -384,7 +384,7 @@ public class CartFragment extends Fragment {
     public void applyCouponCode() {
         loadingDialog.show();
         String coupon = (isEmpty(couponCode)) ? "null" : couponCode.getText().toString();
-        String url = Site.UPDATE_COUPON + userSession.userID + "/" + coupon;
+        String url = Site.UPDATE_COUPON + userSession.userID + "/" + coupon + "?token_key=" + Site.TOKEN_KEY;
         JSONObject data = new JSONObject();
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {
@@ -446,7 +446,7 @@ public class CartFragment extends Fragment {
     }
 //    public void applyRewardDiscount() {
 //        loadingDialog.show();
-//        String url = Site.APPLY_REWARD + userSession.userID;
+//        String url = Site.APPLY_REWARD + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
 //        JSONObject data = new JSONObject();
 //        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
 //                new Response.Listener<JSONObject>() {

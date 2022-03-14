@@ -276,7 +276,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
 //    public void fetchCategories() {
 //        catProgress.setVisibility(View.VISIBLE);
 //
-//        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order";
+//        String url = Site.CATEGORIES + "?hide_empty=1&order_by=menu_order" + Site.TOKEN_KEY_APPEND;
 //
 //        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
 //            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -318,7 +318,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
 //        tagProgress.setVisibility(View.GONE);
 ////        tagProgress.setVisibility(View.VISIBLE);
 ////
-////        String url = Site.TAGS  + "?hide_empty=1&order_by=menu_order";
+////        String url = Site.TAGS  + "?hide_empty=1&order_by=menu_order" + Site.TOKEN_KEY_APPEND;
 ////
 ////        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
 ////            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -360,7 +360,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
 //        colorProgress.setVisibility(View.GONE);
 ////        colorProgress.setVisibility(View.VISIBLE);
 ////
-////        String url = Site.ATTRIBUTES  + "?name=color";
+////        String url = Site.ATTRIBUTES  + "?name=color" + Site.TOKEN_KEY_APPEND;
 ////
 ////
 ////        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -405,7 +405,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
 //
 //        sizeProgress.setVisibility(View.VISIBLE);
 //
-//        String url = Site.ATTRIBUTES  + "?name=size";
+//        String url = Site.ATTRIBUTES  + "?name=size" + Site.TOKEN_KEY_APPEND;
 //
 //
 //        StringRequest request = new StringRequest(url, new Response.Listener<String>() {

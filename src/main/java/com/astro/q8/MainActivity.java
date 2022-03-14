@@ -511,6 +511,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject data = new JSONObject();
                     try {
                         data.put("device", token);
+                        data.put("token_key", Site.TOKEN_KEY);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -673,7 +674,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateProfilePic() {
         if (getIntent().hasExtra("from_login")) {
 
-            String url = Site.USER + userSession.userID;
+            String url = Site.USER + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
             StringRequest request = new StringRequest(url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

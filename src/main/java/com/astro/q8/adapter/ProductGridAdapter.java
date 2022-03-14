@@ -261,7 +261,7 @@ public class ProductGridAdapter extends BaseAdapter {
         ((MainActivity) activity).changeFragment(R.id.product_fragment, bundle);
     }
     public void addToWishList(String productID, String userID, ImageView wishListToggle, int position) {
-        String url = Site.ADD_TO_WISH_LIST + userID + "/" + productID;
+        String url = Site.ADD_TO_WISH_LIST + userID + "/" + productID + "?token_key=" + Site.TOKEN_KEY;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
@@ -290,9 +290,9 @@ public class ProductGridAdapter extends BaseAdapter {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast toast = Toast.makeText(context, "Error updating wishlist!.", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
-                toast.show();
+//                Toast toast = Toast.makeText(context, "Error updating wishlist!.", Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
+//                toast.show();
             }
         });
 
@@ -302,7 +302,7 @@ public class ProductGridAdapter extends BaseAdapter {
         rQueue.add(postRequest);
     }
     public void removeFromWishList(String productID, String userID, ImageView wishListToggle, int position) {
-        String url = Site.REMOVE_FROM_WISH_LIST + userID + "/" + productID;
+        String url = Site.REMOVE_FROM_WISH_LIST + userID + "/" + productID + "?token_key=" + Site.TOKEN_KEY;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
@@ -315,9 +315,9 @@ public class ProductGridAdapter extends BaseAdapter {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast toast = Toast.makeText(context, "Error updating wishlist!.", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
-                toast.show();
+//                Toast toast = Toast.makeText(context, "Error updating wishlist!.", Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
+//                toast.show();
             }
         });
 

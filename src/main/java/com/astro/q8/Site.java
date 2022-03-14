@@ -4,6 +4,8 @@ public class Site {
     public static final String PROTOCOL = "https";
     public static final String DOMAIN =     "astroq8.com"; //"192.168.43.11"; // "192.168.43.223"; //"10.0.2.2"; //
     public static final String ADDRESS = PROTOCOL + "://" + DOMAIN + "/";
+    public static final String TOKEN_KEY = "OyO3muQ98b1uEHzQVg4X4trpFcrx3SxFFZIWXHAOz6HWZBUoLe";
+    public static final String TOKEN_KEY_APPEND = "&token_key=" + TOKEN_KEY;
     public static final String INFO = ADDRESS + "wp-json/skye-api/v1/site-info/";
     public static final String CART = ADDRESS + "wp-json/skye-api/v1/cart/";
     public static final String ADD_TO_CART = ADDRESS + "wp-json/skye-api/v1/add-to-cart/";

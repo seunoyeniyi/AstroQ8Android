@@ -236,6 +236,7 @@ public class RegisterActivity extends AppCompatActivity {
         data.put("email", emailEditText.getText().toString());
         data.put("password", passwordEditText.getText().toString());
         data.put("replace_cart_user", userSession.userID);
+        data.put("token_key", Site.TOKEN_KEY);
 
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
@@ -291,6 +292,7 @@ public class RegisterActivity extends AppCompatActivity {
         data.put("email", email);
         data.put("register_id", register_id);
         data.put("register_type", register_type);
+        data.put("token_key", Site.TOKEN_KEY);
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {

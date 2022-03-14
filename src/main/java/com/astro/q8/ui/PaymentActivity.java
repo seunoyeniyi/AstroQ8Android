@@ -186,7 +186,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
     public void fetchCartData(Context context) {
-        String url = Site.CART + userSession.userID;
+        String url = Site.CART + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -337,7 +337,7 @@ public class PaymentActivity extends AppCompatActivity {
             return;
         }
         loader.show();
-        String url = Site.USER + userSession.userID;
+        String url = Site.USER + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -429,6 +429,7 @@ public class PaymentActivity extends AppCompatActivity {
                         jsonParam.put("clear_cart", "1"); //clear cart after order created
                         if (!userSession.logged()) userSession.logout(); //to clear the hash id
                     }
+                    jsonParam.put("token_key", Site.TOKEN_KEY);
 
                     //for AstroQ8 and MyShirtEg.. will allow guest to order
                     if (!userSession.logged()) {
@@ -571,7 +572,7 @@ public class PaymentActivity extends AppCompatActivity {
     public void applyCouponCode() {
         loader.show();
         String coupon = (isEmpty(couponCode)) ? "null" : couponCode.getText().toString();
-        String url = Site.UPDATE_COUPON + userSession.userID + "/" + coupon;
+        String url = Site.UPDATE_COUPON + userSession.userID + "/" + coupon + "?token_key=" + Site.TOKEN_KEY;
         JSONObject data = new JSONObject();
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {
@@ -615,7 +616,7 @@ public class PaymentActivity extends AppCompatActivity {
     }
     public void changeShippingMethod(String method) {
         loader.show();
-        String url = Site.CHANGE_CART_SHIPPING + userSession.userID + "/" + method;
+        String url = Site.CHANGE_CART_SHIPPING + userSession.userID + "/" + method + "?token_key=" + Site.TOKEN_KEY;
         JSONObject data = new JSONObject();
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {
@@ -765,6 +766,7 @@ public class PaymentActivity extends AppCompatActivity {
 //            data.put("status", order_status);
 //            data.put("paypal_payment_id", paymentID);
 //            data.put("clear_cart", "1"); //clear cart after order updated
+//            data.put("token_key", Site.TOKEN_KEY);
 //
 //            JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
 //                    new Response.Listener<JSONObject>() {

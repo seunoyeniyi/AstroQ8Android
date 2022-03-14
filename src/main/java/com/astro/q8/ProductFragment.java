@@ -445,7 +445,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
 
     public void  fetchDetail(Context context) {
 //        loadingDialog.show();
-        String url = Site.PRODUCT + product_id + "?user_id=" + userSession.userID;
+        String url = Site.PRODUCT + product_id + "?user_id=" + userSession.userID + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -837,7 +837,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
 
 
     public void addToWishList(String productID, String userID, ImageView wishListToggle) {
-        String url = Site.ADD_TO_WISH_LIST + userID + "/" + parent_id;
+        String url = Site.ADD_TO_WISH_LIST + userID + "/" + parent_id + "?token_key=" + Site.TOKEN_KEY;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
@@ -876,7 +876,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
         rQueue.add(postRequest);
     }
     public void removeFromWishList(String productID, String userID, ImageView wishListToggle) {
-        String url = Site.REMOVE_FROM_WISH_LIST + userID + "/" + productID;
+        String url = Site.REMOVE_FROM_WISH_LIST + userID + "/" + productID + "?token_key=" + Site.TOKEN_KEY;
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
@@ -911,6 +911,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
         JSONObject data = new JSONObject();
         data.put("rating", rating);
         data.put("comment", comment);
+        data.put("token_key", Site.TOKEN_KEY);
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
                 new Response.Listener<JSONObject>() {

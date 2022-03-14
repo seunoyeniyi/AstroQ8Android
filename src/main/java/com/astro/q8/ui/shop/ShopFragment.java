@@ -409,6 +409,8 @@ public class ShopFragment extends Fragment {
                         url = Site.SIMPLE_PRODUCTS + "?price_range=" + String.valueOf(priceRange.get(0)) + "|" + String.valueOf(priceRange.get(1)) + "&per_page=40&hide_description=1&show_variation=1" + "&user_id=" + userSession.userID + "&paged=" + paged;
                 }
 
+                url = url + Site.TOKEN_KEY_APPEND;
+
 //            Log.e("PPPP", url);
 
                 StringRequest request = new StringRequest(url, new Response.Listener<String>() {

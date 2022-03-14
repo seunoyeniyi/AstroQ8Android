@@ -158,7 +158,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     public void fetchCartData(Context context) {
-        String url = Site.CART + userSession.userID;
+        String url = Site.CART + userSession.userID + "?token_key=" + Site.TOKEN_KEY;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -230,7 +230,7 @@ public class AddressActivity extends AppCompatActivity {
         }
 //        fetch user data and set form if the user have the fields
         loader.show();
-        String url = Site.USER + userSession.userID + "?with_regions=1";
+        String url = Site.USER + userSession.userID + "?with_regions=1" + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -437,6 +437,7 @@ public class AddressActivity extends AppCompatActivity {
         data.put("phone", phone.getText().toString());
 //        data.put("selected_country", selectedCountry);
 //        data.put("selected_state", selectedState);
+        data.put("token_key", Site.TOKEN_KEY);
 
         loader.show();
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, data,
@@ -522,6 +523,7 @@ public class AddressActivity extends AppCompatActivity {
                     JSONObject data = new JSONObject();
                     try {
                         data.put("device", token);
+                        data.put("token_key", Site.TOKEN_KEY);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

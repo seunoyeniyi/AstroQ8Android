@@ -327,6 +327,8 @@ public class SearchFragment extends Fragment {
             url += "&price_range=" + String.valueOf(priceRange.get(0)) + "|" + String.valueOf(priceRange.get(1));
         }
 
+        url = url + Site.TOKEN_KEY_APPEND;
+
         @SuppressLint("SetTextI18n") StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -471,7 +473,7 @@ public class SearchFragment extends Fragment {
     public void suggestSearch(String query) {
         suggestiveProgress.setVisibility(View.VISIBLE);
 
-        String url = Site.SEARCH + "?s=" + query;
+        String url = Site.SEARCH + "?s=" + query + Site.TOKEN_KEY_APPEND;
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
